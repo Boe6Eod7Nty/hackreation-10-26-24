@@ -42,16 +42,16 @@ class PhysicsObject:
         # check for wall collision
         if newX < leftWall:
             newX = leftWall
-            speedX = -(speedX)
+            speedX = -(speedX*0.9)
         elif newX > rightWall:
             newX = rightWall
-            speedX = -(speedX)
+            speedX = -(speedX*0.9)
         if newY < botWall:
             newY = botWall
-            speedY = -(speedY)
+            speedY = -(speedY*0.9)
         elif newY > topWall:
             newY = topWall
-            speedY = -(speedY)
+            speedY = -(speedY*0.9)
 
         # check for peg collision
         for peg in boardPegsList:
