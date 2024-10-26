@@ -8,36 +8,45 @@ timePerFrame = 1 / refreshRate
 gravity = 9.80665
 dataFile = 'processedData.csv'
 
+class PhysicsObject:
+    def __init__(self, x, y, speedX, speedY, accelX, accelY):
+        self.x = x
+        self.y = y
+        self.speedX = speedX
+        self.speedY = speedY
+        self.accelX = accelX
+        self.accelY = accelY
+
+def processObjectFrame(physicsObject):
+    '''
+    Returns physicsObject with updated values
+    '''
+    newX = physicsObject.x + physicsObject.speedX * timePerFrame + 0.5 * physicsObject.accelX * timePerFrame**2
+    newY = physicsObject.y + physicsObject.speedY * timePerFrame + 0.5 * physicsObject.accelY * timePerFrame**2
+
+    speedX = physicsObject.speedX + physicsObject.accelX * timePerFrame
+    speedY = physicsObject.speedY + physicsObject.accelY * timePerFrame
+
+    return PhysicsObject(newX, newY, speedX, speedY, physicsObject.accelX, physicsObject.accelY)
+
+startingBall = PhysicsObject(0, 0, 0, 0, 0, gravity)
+
 data = []
-ballStartingData = {'frame': 0, 'ballX': 0, 'ballY': 0, 'speedX': 0.0, 'speedY': 0.0, 'accelX': 0, 'accelY': gravity}
 
 os.remove(dataFile)
-data.append(ballStartingData)
 
-for frame in range(1, totalFrames):
+for frame in range(0, totalFrames):
 
-    previousFrame = data[frame - 1]
-
-    oldX = previousFrame['ballX']
-    oldY = previousFrame['ballY']
-    oldSpeedX = previousFrame['speedX']
-    oldSpeedY = previousFrame['speedY']
-
-    newX = oldX + oldSpeedX * timePerFrame + 0.5 * previousFrame['accelX'] * timePerFrame**2
-    newY = oldY + oldSpeedY * timePerFrame + 0.5 * previousFrame['accelY'] * timePerFrame**2
-
-    speedX = oldSpeedX + previousFrame['accelX'] * timePerFrame
-    speedY = oldSpeedY + previousFrame['accelY'] * timePerFrame
-    
-
-    ballData = {}
-    ballData['frame'] = previousFrame['frame'] + 1
-    ballData['ballX'] = newX
-    ballData['ballY'] = newY
-    ballData['speedX'] = speedX
-    ballData['speedY'] = speedY
-    ballData['accelX'] = previousFrame['accelX']
-    ballData['accelY'] = previousFrame['accelY']
+    startingBall = processObjectFrame(startingBall)
+    ballData = {
+        'frame': frame,
+        'ballX': startingBall.x,
+        'ballY': startingBall.y,
+        'speedX': startingBall.speedX,
+        'speedY': startingBall.speedY,
+        'accelX': startingBall.accelX,
+        'accelY': startingBall.accelY
+    }
 
     data.append(ballData)
 
