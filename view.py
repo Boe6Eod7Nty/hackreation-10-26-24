@@ -37,23 +37,25 @@ class View(tk.Tk):
     def initUI(self,presenter:Presenter)->None:
         '''Set up the element in the graphical interface.'''
 
+        self.presenter = presenter
         self.columnconfigure(0,weight=1)
         self.rowconfigure(1,weight=1)
         # Icon frame
-        self.iconFrame = TopBanner(self,bg = 'red')
+        self.iconFrame = TopBanner(self,presenter,bg = 'red')
         self.iconFrame.grid(row=0,column=0,sticky='EW')
         
         self.gameCanvas = tk.Canvas(self,bg= 'gray30')
         self.gameCanvas.grid(row=1,column=0,sticky='NEWS')
         
 class TopBanner(tk.Frame):
-    def __init__(self, *args, **kwarg):
+    def __init__(self, parent, presenter, *args, **kwarg):
         '''Inititialize tkinter'''
-        super().__init__()
+        super().__init__(*args, **kwarg)
         
+        self.presenter = presenter
         self.columnconfigure(1,weight=1)
         
-        self.startButton = ttk.Button(self,text="Start game")
+        self.startButton = ttk.Button(self,text="Start game",command = self.presenter.DropTheBall)
         self.startButton.grid(row=0,column=0,sticky='W')
         
         self.optionsButtion = ttk.Button(self,text="Options")

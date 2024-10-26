@@ -1,11 +1,22 @@
 import numpy as np
-
+from engine import PhysicsObject
 
 class Model():
     '''Model class containing all the submodel of the software.'''
 
     def __init__(self)->None:
         '''Initialize the model class.'''
+        self.gameFrequency = 30
+        self.timeStep = 1/self.gameFrequency
+        self.noOfBalls = 1
+        self.gravity = -9.81
+        self.canvasHeight = 5 # in meters
+        self.iSimulationRunning = False
+        radius = 20
+        
+        color = '#FF0000'
+        self.ball = PhysicsObject(0, 0, 0, 0, 0, self.gravity, radius,color)
+        self.ball.timePerFrame = self.timeStep
         
 
 
@@ -14,10 +25,7 @@ class GameSettings():
     ''' Game Settings'''
     
     def __init__(self)->None:
-        gameFrequency = 60
-        noOfBalls = 1
-        gravity = 9.81
-        ball = BallModel(ballX = 20)
+        '''fff'''
         
 class BallModel():
     '''Game model'''

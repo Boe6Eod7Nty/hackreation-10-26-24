@@ -29,10 +29,16 @@ class Presenter():
         # Initialize UI and start the loop 
         self.view.initUI(self)
         
-        self.view.protocol("WM_DELETE_WINDOW", self._on_closing)  # Force closing when 
         
         self.view.after(16)  # 16 milliseconds (roughly 60 FPS)
+        if self.model.iSimulationRunning:
+            self.model.ball.processObjectFrame()
+            print(self.model.y)
+            
+            
         self.view.mainloop()
+        
+        self.view.protocol("WM_DELETE_WINDOW", self._on_closing)  # Force closing when 
 
     def _on_closing(self):
         self.view.quit()  # stops mainloop
@@ -40,5 +46,47 @@ class Presenter():
         
     def DropTheBall(self):
         '''Drop the ball'''
+        print("Dropping the ball.")
+        self.model.isSimulationRunning = True
+        
+        # Get canvas border 
+        canvHeight= self.view.gameCanvas.winfo_height()
+        canvWidth= self.view.gameCanvas.winfo_width()
+        canvasCenter = canvWidth*0.5
+        print(canvWidth)
+        print(canvHeight)
+        
+        ballX0 = (self.model.ball.x - self.model.ball.radius)+canvasCenter
+        ballX1 = (self.model.ball.x + self.model.ball.radius)+canvasCenter
+        ballY0 = self.model.ball.y - self.model.ball.radius
+        ballY1 = self.model.ball.y + self.model.ball.radius
+        self.view.gameCanvas.create_oval(ballX0,ballY0,ballX1,ballY1)
+        # self.view.gameCanvas
+        while self.model.isSimulationRunning == True:
+            
+            self.view.gameCanvas.delete("all")
+            self.model.ball.processObjectFrame()        
+            ballX0 = (self.model.ball.x - self.model.ball.radius)+canvasCenter
+            ballX1 = (self.model.ball.x + self.model.ball.radius)+canvasCenter
+            ballY0 = self.model.ball.y - self.model.ball.radius
+            ballY1 = self.model.ball.y + self.model.ball.radius
+            
+            self.view.gameCanvas.create_oval(ballX0,-ballY0,ballX1,-ballY1, fill = 'white')
+            self.view.gameCanvas.update_idletasks()
+            
+            print("Ball y: " + str(self.model.ball.y))
+            print("-canvHeight: " + str(-canvHeight))
+            
+            if self.model.ball.y < -canvHeight:
+                self.model.isSimulationRunning = False
+                break
+        
+        
+        self.model.ball.x = 0
+        self.model.ball.y = 0
+        self.model.ball.speedX = 0
+        self.model.ball.speedY = 0
+        self.model.isSimulationRunning = False
+        
         
         
