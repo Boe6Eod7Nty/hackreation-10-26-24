@@ -81,6 +81,6 @@ class TopBanner(tk.Frame):
         self.startButton = ttk.Button(self,text="Start game",command = self.presenter.DropTheBall)
         self.startButton.grid(row=0,column=0,sticky='W')
         
-        self.optionsButton = ttk.Button(self, text="Options")
-        self.optionsButton.grid(row=0, column=1, sticky='W')
-
+        self.optionsButton = ttk.Button(self,text="Options", command = lambda: self.presenter.OpenOptions(self.optionsButton))
+        self.optionsButton.grid(row=0,column=1,sticky='W')
+        

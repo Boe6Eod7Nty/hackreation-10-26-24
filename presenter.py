@@ -89,4 +89,20 @@ class Presenter():
         self.model.isSimulationRunning = False
         
         
+    def OpenOptions(self,subplotOptsBtn)->None:
+        '''Open subplot options.'''   
+        # Create new window
+        optsWindowX = subplotOptsBtn.winfo_rootx()
+        optsWindowY = subplotOptsBtn.winfo_rooty()
+        optsWindow = tk.Toplevel(self.view)
+        optsWindow.geometry(f"+{optsWindowX}+{optsWindowY}")
+        optsWindow.columnconfigure(0,weight=1)
+        optsWindow.rowconfigure(0,weight=1)
+        optsWindow.resizable(False, False)
+        optsWindow.grab_set()        
+        
+
+        
+
+                    
         
