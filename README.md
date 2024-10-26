@@ -1,11 +1,11 @@
 # hackreation-10-26-24
-Team Name
+## Team Name
   * Team Pachinko
-Team Participants
+## Team Participants
   * Ben Anderson
   * Jose Romero
   * Fed Zappaterra
-Project Name
+## Project Name
   * Pachinko Machine
-Project Description
+## Project Description
   * Recreating a pachinko gambling machine from Japanese Pachinko Parlor
