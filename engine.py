@@ -7,6 +7,15 @@ totalFrames = int(timeToSimulate * refreshRate)
 timePerFrame = 1 / refreshRate
 gravity = -9.80665
 dataFile = 'outDataDev.csv'
+boardPegsList = []
+
+class PegObject:
+    def __init__(self, x, y, radius, color, shape):
+        self.x = x
+        self.y = y
+        self.radius = radius
+        self.color = color
+        self.shape = shape
 
 class PhysicsObject:
     def __init__(self, x, y, speedX, speedY, accelX, accelY, radius, color):
@@ -19,15 +28,10 @@ class PhysicsObject:
         self.timeStep = timePerFrame
         self.radius = radius
         self.color = color
-    def processObjectFrame(self):
+    def processObjectFrame(self, leftWall, rightWall, topWall, botWall):
         '''
         Updates physics object based on current state to next frame location
         '''
-        # define boundaries
-        leftWall = -100
-        rightWall = 100
-        topWall = 100
-        botWall = -100
 
         # update physics by verlet integration
         newX = self.x + self.speedX * timePerFrame + 0.5 * self.accelX * timePerFrame**2
@@ -49,13 +53,23 @@ class PhysicsObject:
             newY = topWall
             speedY = -(speedY)
 
+        # check for peg collision
+        for peg in boardPegsList:
+            distance = ((newX - peg.x) ** 2 + (newY - peg.y) ** 2) ** 0.5
+            jointRadius = peg.radius + self.radius
+            if distance < jointRadius:
+                pass
+        
+
         # update object
         self.x = newX
         self.y = newY
         self.speedX = speedX
         self.speedY = speedY
 
-startingBall = PhysicsObject(0, 0, 50, -5, 0, gravity, 0.5, 'red')
+startingBall = PhysicsObject(0, 0, 50, -25, 0, gravity, 0.5, 'red')
+startingPeg = PegObject(0.1, -20, 25, 'white', 'circle')
+boardPegsList.append(startingPeg)
 
 data = []
 try:
@@ -65,7 +79,7 @@ except:
 
 for frame in range(0, totalFrames):
 
-    startingBall.processObjectFrame()
+    startingBall.processObjectFrame(-100, 100, 100, -100)
     ballData = {
         'frame': frame,
         'ballX': startingBall.x,
