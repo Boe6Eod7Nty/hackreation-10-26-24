@@ -33,9 +33,17 @@ class Presenter():
         self.view.initUI(self)
         
         self.view.protocol("WM_DELETE_WINDOW", self._on_closing)  # Force closing when 
+        
+        self.view.after(16)  # 16 milliseconds (roughly 60 FPS)
         self.view.mainloop()
 
     def _on_closing(self):
         self.view.quit()  # stops mainloop
         self.view.destroy()  # this is necessary on Windows to prevent Fatal Python Error: PyEval_RestoreThread: NULL tstate
+        
+    def DropTheBall(self):
+        '''Drop the ball'''
+        self.model.ball
+        
+        self.
         

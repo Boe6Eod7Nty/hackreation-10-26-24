@@ -1,5 +1,7 @@
 import tkinter as tk
 from presenter import Presenter
+from topBannerUi import TopBannerUI
+
 try:
     from ctypes import windll
     windll.shcore.SetProcessDpiAwareness(1)
@@ -35,12 +37,12 @@ class UI(tk.Tk):
     def initUI(self,presenter:Presenter)->None:
         '''Set up the element in the graphical interface.'''
 
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(2,weight=1)
-        self.rowconfigure(3,weight=0)
-
+        self.columnconfigure(0,weight=1)
+        self.rowconfigure(1,weight=1)
         # Icon frame
-        self.iconFrame = tk.Frame(self,bg='blue')
-        self.iconFrame.grid(row=1,column=0,sticky='EW')
-        self.iconFrame.columnconfigure(0,weight=1)
+        self.iconFrame = TopBannerUI(self,bg = 'red')
+        self.iconFrame.grid(row=0,column=0,sticky='EW')
+        
+        self.gameCanvas = tk.Canvas(self,bg= 'gray30')
+        self.gameCanvas.grid(row=1,column=0,sticky='NEWS')
         

@@ -3,11 +3,12 @@ from ui import UI
 from presenter import Presenter
 
 
+
 try:
     from ctypes import windll
     windll.shcore.SetProcessDpiAwareness(1)
 except:
-        passpiup
+        '''Nothin'''
 
  
 def main() -> None:
@@ -20,4 +21,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main().venv
+    main()
