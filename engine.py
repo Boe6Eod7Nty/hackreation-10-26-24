@@ -16,18 +16,18 @@ class PhysicsObject:
         self.speedY = speedY
         self.accelX = accelX
         self.accelY = accelY
+        self.timeStep = timePerFrame
+    def processObjectFrame(self):
+        '''
+        Returns physicsObject with updated values
+        '''
+        newX = self.x + self.speedX * timePerFrame + 0.5 * self.accelX * timePerFrame**2
+        newY = self.y + self.speedY * timePerFrame + 0.5 * self.accelY * timePerFrame**2
 
-def processObjectFrame(physicsObject):
-    '''
-    Returns physicsObject with updated values
-    '''
-    newX = physicsObject.x + physicsObject.speedX * timePerFrame + 0.5 * physicsObject.accelX * timePerFrame**2
-    newY = physicsObject.y + physicsObject.speedY * timePerFrame + 0.5 * physicsObject.accelY * timePerFrame**2
+        speedX = self.speedX + self.accelX * timePerFrame
+        speedY = self.speedY + self.accelY * timePerFrame
 
-    speedX = physicsObject.speedX + physicsObject.accelX * timePerFrame
-    speedY = physicsObject.speedY + physicsObject.accelY * timePerFrame
-
-    return PhysicsObject(newX, newY, speedX, speedY, physicsObject.accelX, physicsObject.accelY)
+        return PhysicsObject(newX, newY, speedX, speedY, self.accelX, self.accelY)
 
 startingBall = PhysicsObject(0, 0, 0, 0, 0, gravity)
 
