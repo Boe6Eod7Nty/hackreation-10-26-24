@@ -6,7 +6,7 @@ timeToSimulate = 2 # time to run the engine, in seconds
 totalFrames = int(timeToSimulate * refreshRate)
 timePerFrame = 1 / refreshRate
 gravity = 9.80665
-dataFile = 'processedData.csv'
+dataFile = 'outDataDev.csv'
 
 class PhysicsObject:
     def __init__(self, x, y, speedX, speedY, accelX, accelY):
@@ -31,15 +31,17 @@ class PhysicsObject:
         self.speedX = speedX
         self.speedY = speedY
 
-startingBall = PhysicsObject(0, 0, 0, 0, 0, gravity)
+startingBall = PhysicsObject(0, 0, 0.1, 0, 0, gravity)
 
 data = []
-
-os.remove(dataFile)
+try:
+    os.remove(dataFile)
+except:
+    pass
 
 for frame in range(0, totalFrames):
 
-    startingBall = processObjectFrame(startingBall)
+    startingBall.processObjectFrame()
     ballData = {
         'frame': frame,
         'ballX': startingBall.x,
