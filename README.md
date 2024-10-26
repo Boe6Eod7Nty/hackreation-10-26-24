@@ -1,9 +1,11 @@
 # hackreation-10-26-24
-
-## Steps To Participate
-1) Fork this Repository
-2) Create a PR that contains:
   * Team Name
+  *    Team Pachinko
   * Team Participants
+  *    Ben Anderson
+  *    Jose Romero
+  *    Fed Zappaterra
   * Project Name
+  *    Pachinko Machine
   * Project Description
+  *    Recreating a pachinko gambling machine from Japanese Pachinko Parlor
