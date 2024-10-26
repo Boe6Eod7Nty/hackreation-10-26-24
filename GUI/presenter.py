@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import filedialog, ttk
-from collections import defaultdict
 import os
 import threading
 import subprocess

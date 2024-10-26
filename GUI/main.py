@@ -1,6 +1,6 @@
-from model.model import Model 
-from ui.ui import UI
-from presenter.presenter import Presenter
+from model import Model 
+from ui import UI
+from presenter import Presenter
 
 
 
