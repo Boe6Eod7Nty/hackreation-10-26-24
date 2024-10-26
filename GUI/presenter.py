@@ -31,7 +31,7 @@ class Presenter():
         '''Run the UI.'''
         # Initialize UI and start the loop 
         self.view.initUI(self)
-        self.LoadSettings()
+        
         self.view.protocol("WM_DELETE_WINDOW", self._on_closing)  # Force closing when 
         self.view.mainloop()
 
