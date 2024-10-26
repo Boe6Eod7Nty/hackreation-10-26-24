@@ -19,15 +19,17 @@ class PhysicsObject:
         self.timeStep = timePerFrame
     def processObjectFrame(self):
         '''
-        Returns physicsObject with updated values
+        Updates physics object based on current state to next frame location
         '''
         newX = self.x + self.speedX * timePerFrame + 0.5 * self.accelX * timePerFrame**2
         newY = self.y + self.speedY * timePerFrame + 0.5 * self.accelY * timePerFrame**2
-
         speedX = self.speedX + self.accelX * timePerFrame
         speedY = self.speedY + self.accelY * timePerFrame
 
-        return PhysicsObject(newX, newY, speedX, speedY, self.accelX, self.accelY)
+        self.x = newX
+        self.y = newY
+        self.speedX = speedX
+        self.speedY = speedY
 
 startingBall = PhysicsObject(0, 0, 0, 0, 0, gravity)
 
