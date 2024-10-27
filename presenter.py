@@ -65,7 +65,11 @@ class Presenter():
         while self.model.isSimulationRunning == True:
             
             self.view.gameCanvas.delete("all")
-            self.model.ball.processObjectFrame()        
+            leftWall = 0
+            rightWall = canvWidth
+            topWall = +100
+            botWall = -canvHeight
+            self.model.ball.processObjectFrame(leftWall, rightWall, topWall, botWall)        
             ballX0 = (self.model.ball.x - self.model.ball.radius)+canvasCenter
             ballX1 = (self.model.ball.x + self.model.ball.radius)+canvasCenter
             ballY0 = self.model.ball.y - self.model.ball.radius
